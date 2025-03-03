@@ -24,7 +24,7 @@ If you wish to modify any of the measurements, i reccomend you start looking fro
 
 I have added a mount for this all sky camera enclosure, if wish want to hang yours by a drainpipe, you can print an additional mounting ring, that goes between the top and bottom part of the enclosure. Then, you will need to print both mounting arms (or hooks), which you will then attach to the mounting ring (use 2 connectors for better support, but one on the lower end should be sufficient):
 
-![mount](docs/mount.png)
+![mount](docs/mount.jpg)
 
 You will probably need to adjust the measurements of the individual arms, you can do so by opening `allsky_mount.scad` in OpenSCAD and moving sliders in the customizer window on the right side.
 After this, you can hang the whole contraption on a drain pipe, and it should stay fixed quite snuggly.
