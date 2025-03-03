@@ -1,0 +1,16 @@
+{
+    "parameterSets": {
+        "design default values": {
+            "$fn": "200",
+            "arc_radius": "130",
+            "foot_height": "30",
+            "foot_length": "50",
+            "height": "20",
+            "lip_depth": "50",
+            "lip_height": "30",
+            "lip_length": "35",
+            "thickness": "10"
+        }
+    },
+    "fileFormatVersion": "1"
+}
