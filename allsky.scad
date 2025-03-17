@@ -69,8 +69,15 @@ module top(){
         
         screws();
         
+		translate([-36, 0, 0]) //heater vent hole 1
+		cylinder(h=100, d=30, center=true);
+		
+		translate([-25, -25, 0]) //heater vent hole 2
+		cylinder(h=100, d=20, center=true);
+		
+		translate([-25, 25, 0]) //heater vent hole 2
+		cylinder(h=100, d=20, center=true);
     }
-
 }
 
 module rpi_holder(){
@@ -105,7 +112,6 @@ module top_part(){
         translate([- camera_slot_width / 2, -camera_slot_offset, -cylinder_height/2 - 1])
         cube([camera_slot_width, camera_slot_length, camera_slot_height]);
     }
-
 }
 
 t_id = 130;
@@ -172,6 +178,10 @@ module enclosure() {
     
 }
 
+module fan_hole(){
+	
+}
+
 module bottom(){
     center_offset = 25;
     
@@ -200,6 +210,39 @@ module bottom(){
     }
 }
 
+module hook(tx, ty){ 
+    
+    difference(){
+        cube([2*tx, ty*3, 20]);
+        translate([tx/2, ty, -10])
+        cube([tx, ty, 100]);
+    }
+}
+
+module mountpoint(dx, dz){
+    translate([dx, cylinder_diameter/2 - 40, dz])
+    cube([20, 50, 10]);
+    translate([dx, cylinder_diameter/2 + 10, dz])
+    hook(10, 5);
+}
+
+module hooks(){
+
+    translate([0, -1, 0])
+    difference(){
+        translate([30, 0, 0])
+        union(){
+            mountpoint(-10, -12);
+            mountpoint(-70, -12);
+        }
+        
+        translate([0, 0, -10])
+        cylinder(h=cylinder_height+5, r1=cylinder_diameter/2,
+        r2=cylinder_diameter/2+4, center=true);
+    }
+
+}
+
 module AllSkyHousing(){
     top_part();
     color("#00ffff")
@@ -207,13 +250,21 @@ module AllSkyHousing(){
     color("#ff0000")
     translate([0, 10, 0])
     rpi_holder();
+	
+	translate([0, -2, 6])
+	hooks();
 }
 
-   
-AllSkyHousing();
 
-translate([0, 0, 150])
-enclosure();
+difference(){
+	AllSkyHousing();
+	
+	translate([0, -40, -3])
+    cylinder(h=cylinder_height + 2, d=mounting_hole_diameter, center=true);
+}
+
+//translate([0, 0, 150])
+//enclosure();
 
 //standoffs
 /*difference(){
@@ -344,10 +395,68 @@ ring(50);
 */
 
 
+/*
+//heater visualization
+module heater(){
+
+r_in = 28;
+fan_w = 30;
+fan_h = 8;
+h_h = 50;
 
 
+	module tube(){
+		cylinder(h=h_h/4, d=r_in+2);
+	}
+
+	module fan_holder(){
+		translate([-fan_w/2, -fan_w/2, -fan_h])
+			cube([fan_w+2, fan_w+2, fan_h]);
+	}
+
+	module hole(){
+		rotate([0, 90, 0])
+		translate([0, 0, -50])
+		cylinder(h=100, r=2);
+	}
+
+	difference(){
+		hull(){
+			translate([1, 1, 0])
+			tube();
+			fan_holder();
+		}
+
+		translate([-fan_w/2, -fan_w/2, -fan_h])
+		translate([1, 1, -1])
+		cube([fan_w, fan_w, fan_h+2]);
+		
+		
+		translate([1, 1, -1])
+			cylinder(h=h_h+20, d=r_in);
+	}
 
 
+	difference(){
+		translate([1, 1, 2])
+		cylinder(h=h_h-2, d=r_in+2);
+		
+		translate([1, 1, -1])
+		cylinder(h=h_h+20, d=r_in);
+		
+		translate([0, 0, 20])
+		hole();
+		
+		translate([0, 0, 20])
+		rotate([0, 0, 90])
+		hole();
+	}
+	
+}
 
+rotate([0, 180, 0])
+translate([36, 0, -30])
+heater();
 
+*/
 

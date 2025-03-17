@@ -1,9 +1,9 @@
 $fn = 200;
 
-r_in = 38;
-fan_w = 40;
-fan_h = 12;
-h_h = 100;
+r_in = 28;
+fan_w = 30;
+fan_h = 8;
+h_h = 50;
 
 
 module tube(){
@@ -13,6 +13,12 @@ module tube(){
 module fan_holder(){
 	translate([-fan_w/2, -fan_w/2, -fan_h])
 		cube([fan_w+2, fan_w+2, fan_h]);
+}
+
+module hole(){
+	rotate([0, 90, 0])
+	translate([0, 0, -50])
+	cylinder(h=100, r=2);
 }
 
 difference(){
@@ -38,6 +44,13 @@ difference(){
 	
 	translate([1, 1, -1])
 	cylinder(h=h_h+20, d=r_in);
+	
+	translate([0, 0, 20])
+	hole();
+	
+	translate([0, 0, 20])
+	rotate([0, 0, 90])
+	hole();
 }
 
 	//translate([0, 0, -1])
